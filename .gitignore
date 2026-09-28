@@ -1,0 +1,14 @@
+# Secrets / server-specific configuration
+.env
+LAMPAPI/config.php
+
+# OS and editor files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Large media, dependencies, logs
+*.mp4
+node_modules/
+*.log
