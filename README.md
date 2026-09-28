@@ -15,7 +15,6 @@ COLORS is a small web application built with the LAMP stack (Linux, Apache, MySQ
 - MySQL (or MariaDB)
 - PHP 8 with the `mysqli` extension
 - HTML, CSS, and vanilla JavaScript
-- `md5.js` (included in the project but not currently used; see Limitations)
 
 ## Project Structure
 
@@ -51,8 +50,8 @@ sudo apt install apache2 mysql-server php libapache2-mod-php php-mysql git
 ### 2. Get the code
 
 ```bash
-git clone https://github.com/<your-username>/<your-repo>.git
-cd <your-repo>
+git clone https://github.com/trent-y/colors-lamp.git
+cd colors-lamp
 ```
 
 ### 3. Create the database
@@ -125,15 +124,6 @@ All endpoints accept and return JSON via `POST` and live under `/LAMPAPI/`.
 - Search results are inserted into the page with `innerHTML` without escaping, so a color name containing HTML would be rendered as markup.
 - `AddColor.php` reports success even if the insert fails.
 - Database queries use prepared statements, which protects against SQL injection.
-
-## AI Usage
-
-<!-- Edit this section so it accurately reflects what you did and follows your class policy. -->
-
-- **Tool:** [e.g., Claude (Anthropic)]
-- **Dates:** [dates used]
-- **Scope:** Organizing the project into a GitHub repository, drafting this README and the database schema file, and moving database credentials into a git-ignored config file.
-- **Review:** [describe how you reviewed and tested the output]
 
 ## License
 
