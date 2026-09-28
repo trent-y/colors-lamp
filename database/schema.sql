@@ -1,0 +1,19 @@
+-- COLORS database schema.
+-- Create and select a database first (e.g. CREATE DATABASE colors_db;), then run this file.
+
+CREATE TABLE IF NOT EXISTS Users (
+    ID INT NOT NULL AUTO_INCREMENT,
+    firstName VARCHAR(50) NOT NULL DEFAULT '',
+    lastName VARCHAR(50) NOT NULL DEFAULT '',
+    Login VARCHAR(50) NOT NULL DEFAULT '',
+    Password VARCHAR(255) NOT NULL DEFAULT '',
+    PRIMARY KEY (ID)
+);
+
+CREATE TABLE IF NOT EXISTS Colors (
+    ID INT NOT NULL AUTO_INCREMENT,
+    Name VARCHAR(50) NOT NULL DEFAULT '',
+    UserID INT NOT NULL,
+    PRIMARY KEY (ID),
+    FOREIGN KEY (UserID) REFERENCES Users(ID) ON DELETE CASCADE
+);
