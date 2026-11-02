@@ -1,0 +1,19 @@
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+actor "User" as User
+rectangle "COLORS Web Application" {
+  usecase "Log in" as Login
+  usecase "Add color" as Add
+  usecase "Search personal colors" as Search
+  usecase "Log out" as Logout
+}
+User --> Login
+User --> Add
+User --> Search
+User --> Logout
+note bottom of Add
+  Requires userId from login cookie.
+  No server-side session enforcement.
+end note
+@enduml

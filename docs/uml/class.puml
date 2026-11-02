@@ -1,0 +1,52 @@
+@startuml
+skinparam classAttributeIconSize 0
+hide circle
+class "Browser JavaScript (code.js)" as Browser <<module>> {
+  userId : number
+  firstName : string
+  lastName : string
+  doLogin()
+  saveCookie()
+  readCookie()
+  doLogout()
+  addColor()
+  searchColor()
+}
+class "Login.php" as Login <<PHP endpoint>> {
+  getRequestInfo()
+  returnWithInfo(firstName, lastName, id)
+  returnWithError(error)
+}
+class "AddColor.php" as Add <<PHP endpoint>> {
+  getRequestInfo()
+  returnWithError(error)
+}
+class "SearchColors.php" as Search <<PHP endpoint>> {
+  getRequestInfo()
+  returnWithInfo(results)
+  returnWithError(error)
+}
+class "Users" as Users <<database table>> {
+  +ID : INT <<PK>>
+  firstName : VARCHAR(50)
+  lastName : VARCHAR(50)
+  Login : VARCHAR(50)
+  Password : VARCHAR(255)
+}
+class "Colors" as Colors <<database table>> {
+  +ID : INT <<PK>>
+  Name : VARCHAR(50)
+  UserID : INT <<FK>>
+}
+Browser ..> Login : JSON POST / login
+Browser ..> Add : JSON POST / addColor
+Browser ..> Search : JSON POST / searchColor
+Login ..> Users : SELECT
+Add ..> Colors : INSERT
+Search ..> Colors : SELECT LIKE
+Users "1" -- "0..*" Colors : owns (Colors.UserID)
+note bottom
+  Logical UML model: modules/endpoints and database tables
+  are not actual object-oriented classes in this codebase.
+end note
+@enduml

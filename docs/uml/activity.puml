@@ -1,0 +1,39 @@
+@startuml
+start
+:Enter login and password;
+:POST /LAMPAPI/Login.php;
+:Query Users by Login and Password;
+if (Matching user?) then (yes)
+  :Return user ID and name;
+  :Save 20-minute browser cookie;
+  :Navigate to color.html;
+  repeat
+    :Choose an action;
+    if (Add color?) then (yes)
+      :Enter color name;
+      :POST /LAMPAPI/AddColor.php;
+      :INSERT into Colors with userId;
+      :Display add confirmation on HTTP 200;
+    else (no)
+      if (Search colors?) then (yes)
+        :Enter partial color name;
+        :POST /LAMPAPI/SearchColors.php;
+        :SELECT matching Colors for userId;
+        if (Matches found?) then (yes)
+          :Display matching color names;
+        else (no)
+          :Return error response;
+          note right
+            Current JavaScript expects results[];
+            empty search can cause a parsing error.
+          end note
+        endif
+      endif
+    endif
+  repeat while (User has not clicked Log out?) is (yes)
+  :Clear cookie and redirect to index.html;
+else (no)
+  :Show incorrect credentials message;
+endif
+stop
+@enduml
